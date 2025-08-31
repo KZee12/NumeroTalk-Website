@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pranjali Zope - Certified Numerologist | Unlock Your Life's Hidden Patterns</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__brand">
+                <h2 class="nav__logo">Pranjali Zope</h2>
+                <span class="nav__subtitle">Certified Numerologist</span>
+            </div>
+            <ul class="nav__menu" id="navMenu">
+                <li><a href="#home" class="nav__link">Home</a></li>
+                <li><a href="#about" class="nav__link">About</a></li>
+                <li><a href="#services" class="nav__link">Services</a></li>
+                <li><a href="#tools" class="nav__link">Numerology Tools</a></li>
+                <li><a href="#shop" class="nav__link">Shop</a></li>
+                <li><a href="#testimonials" class="nav__link">Testimonials</a></li>
+                <li><a href="#contact" class="nav__link">Contact</a></li>
+            </ul>
+            <div class="nav__actions">
+                <div class="cart-icon">
+                    <span class="cart-count">0</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="m1 1 4 4 17 0 -2 11 -11 0 -2 -11 -4 0"></path>
+                    </svg>
+                </div>
+                <a href="#consultation" class="btn btn--primary">Book Consultation</a>
+            </div>
+            <div class="nav__toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero__container container">
+            <div class="hero__content">
+                <h1 class="hero__title">Unlock Your Life's Hidden Patterns Through Numbers</h1>
+                <p class="hero__subtitle">Professional numerology guidance from certified expert Pranjali Zope</p>
+                <div class="hero__buttons">
+                    <a href="#tools" class="btn btn--primary">Free Number Calculator</a>
+                    <a href="#consultation" class="btn btn--outline">Book Consultation</a>
+                </div>
+            </div>
+            <div class="hero__image">
+                <div class="mystical-orb"></div>
+                <div class="floating-numbers">
+                    <span class="floating-number">1</span>
+                    <span class="floating-number">7</span>
+                    <span class="floating-number">3</span>
+                    <span class="floating-number">9</span>
+                    <span class="floating-number">5</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Meet Pranjali Zope</h2>
+            <div class="about__content">
+                <div class="about__image">
+                    <div class="about__photo-placeholder">
+                        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                            <circle cx="60" cy="60" r="60" fill="var(--color-bg-1)"/>
+                            <circle cx="60" cy="45" r="20" fill="var(--color-primary)"/>
+                            <ellipse cx="60" cy="85" rx="25" ry="15" fill="var(--color-primary)"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="about__text">
+                    <h3>Certified Numerology Expert</h3>
+                    <p>With over a decade of experience in numerology, Pranjali Zope has helped thousands of individuals discover their true potential through the ancient science of numbers. Her certified expertise combines traditional numerological wisdom with modern insights.</p>
+                    <div class="credentials">
+                        <div class="credential">
+                            <h4>10+ Years Experience</h4>
+                            <p>Extensive practice in personal and business numerology</p>
+                        </div>
+                        <div class="credential">
+                            <h4>Certified Practitioner</h4>
+                            <p>Accredited by International Numerology Association</p>
+                        </div>
+                        <div class="credential">
+                            <h4>1000+ Happy Clients</h4>
+                            <p>Successful consultations and life transformations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Numerology Services</h2>
+            <div class="services__grid" id="servicesGrid">
+                <!-- Services will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Tools Section -->
+    <section id="tools" class="tools">
+        <div class="container">
+            <h2 class="section-title">Free Numerology Tools</h2>
+            <div class="calculator">
+                <div class="calculator__content">
+                    <h3>Life Path Number Calculator</h3>
+                    <p>Discover your life path number and unlock insights into your personality and destiny.</p>
+                    <form class="calculator__form" id="calculatorForm">
+                        <div class="form-group">
+                            <label for="fullName" class="form-label">Full Name</label>
+                            <input type="text" id="fullName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthDate" class="form-label">Date of Birth</label>
+                            <input type="date" id="birthDate" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full-width">Calculate My Number</button>
+                    </form>
+                    <div class="calculator__result" id="calculatorResult"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="shop" class="products">
+        <div class="container">
+            <h2 class="section-title">Numerology Products</h2>
+            <div class="products__grid" id="productsGrid">
+                <!-- Products will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <div class="testimonials__carousel" id="testimonialsCarousel">
+                <!-- Testimonials will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultation Booking Section -->
+    <section id="consultation" class="consultation">
+        <div class="container">
+            <h2 class="section-title">Book Your Personal Consultation</h2>
+            <div class="consultation__content">
+                <div class="consultation__form">
+                    <form id="consultationForm">
+                        <div class="form-group">
+                            <label for="clientName" class="form-label">Full Name</label>
+                            <input type="text" id="clientName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientEmail" class="form-label">Email Address</label>
+                            <input type="email" id="clientEmail" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientPhone" class="form-label">Phone Number</label>
+                            <input type="tel" id="clientPhone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceType" class="form-label">Service Type</label>
+                            <select id="serviceType" class="form-control" required>
+                                <option value="">Select a service</option>
+                                <option value="personal">Personal Numerology Reading - $150</option>
+                                <option value="business">Business Numerology - $200</option>
+                                <option value="relationship">Relationship Compatibility - $125</option>
+                                <option value="name">Name Analysis & Correction - $100</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="preferredDate" class="form-label">Preferred Date</label>
+                            <input type="date" id="preferredDate" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message (Optional)</label>
+                            <textarea id="message" class="form-control" rows="4" placeholder="Tell us about your specific needs or questions..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full-width">Schedule Consultation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Footer Section -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> pranjali.zope@numerology.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Address:</strong> Mumbai, Maharashtra, India</p>
+                    </div>
+                </div>
+                <div class="footer__section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer__links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#tools">Free Tools</a></li>
+                        <li><a href="#shop">Shop</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h3>Newsletter</h3>
+                    <p>Stay updated with numerology insights and special offers</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Enter your email" class="form-control">
+                        <button class="btn btn--primary">Subscribe</button>
+                    </div>
+                </div>
+                <div class="footer__section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" target="_blank">Facebook</a>
+                        <a href="#" target="_blank">Instagram</a>
+                        <a href="#" target="_blank">YouTube</a>
+                        <a href="#" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2024 Pranjali Zope - Certified Numerologist. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
