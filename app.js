@@ -1,577 +1,494 @@
 // Application data
 const appData = {
-  services: [
-    {
-      title: "Personal Numerology Reading",
-      description: "Comprehensive analysis of your life path, destiny, and soul numbers",
-      price: "$150",
-      icon: "1"
-    },
-    {
-      title: "Business Numerology",
-      description: "Optimize your business name and launch dates for success",
-      price: "$200",
-      icon: "B"
-    },
-    {
-      title: "Relationship Compatibility",
-      description: "Discover numerical harmony between partners",
-      price: "$125",
-      icon: "♥"
-    },
-    {
-      title: "Name Analysis & Correction",
-      description: "Find the perfect name vibration for positive energy",
-      price: "$100",
-      icon: "N"
-    }
-  ],
-  products: [
-    {
-      name: "Numerology Guide Book",
-      price: "$29.99",
-      category: "Books",
-      icon: "📚"
-    },
-    {
-      name: "Crystal Set for Numbers 1-9",
-      price: "$89.99",
-      category: "Crystals",
-      icon: "💎"
-    },
-    {
-      name: "Personal Number Chart",
-      price: "$49.99",
-      category: "Charts",
-      icon: "📊"
-    },
-    {
-      name: "Digital Numerology Course",
-      price: "$199.99",
-      category: "Digital",
-      icon: "💻"
-    }
-  ],
-  testimonials: [
-    {
-      name: "Sarah M.",
-      text: "Pranjali's numerology reading changed my perspective on life completely!",
-      rating: 5
-    },
-    {
-      name: "David L.",
-      text: "Professional, accurate, and incredibly insightful. Highly recommended!",
-      rating: 5
-    },
-    {
-      name: "Maria R.",
-      text: "The business numerology consultation helped me choose the perfect company name.",
-      rating: 5
-    }
-  ]
-};
-
-// Life path number meanings
-const lifePathMeanings = {
-  1: "The Leader - You are independent, pioneering, and ambitious. Natural born leaders with strong willpower.",
-  2: "The Peacemaker - You are cooperative, diplomatic, and sensitive. You work best in partnerships.",
-  3: "The Creative - You are expressive, optimistic, and artistic. Communication and creativity are your strengths.",
-  4: "The Builder - You are practical, hardworking, and organized. You excel at building solid foundations.",
-  5: "The Adventurer - You are energetic, curious, and freedom-loving. You thrive on variety and change.",
-  6: "The Nurturer - You are caring, responsible, and family-oriented. You have a natural desire to help others.",
-  7: "The Seeker - You are analytical, introspective, and spiritual. You seek deeper truths and knowledge.",
-  8: "The Achiever - You are ambitious, business-minded, and authoritative. Material success comes naturally.",
-  9: "The Humanitarian - You are compassionate, generous, and idealistic. You work for the greater good."
-};
-
-// Shopping cart state
-let cart = [];
-
-// DOM elements
-let navToggle, navMenu, calculatorForm, calculatorResult, consultationForm;
-let servicesGrid, productsGrid, testimonialsCarousel, cartCount;
-
-// Initialize the application
-document.addEventListener('DOMContentLoaded', function() {
-  // Get DOM elements
-  navToggle = document.getElementById('navToggle');
-  navMenu = document.getElementById('navMenu');
-  calculatorForm = document.getElementById('calculatorForm');
-  calculatorResult = document.getElementById('calculatorResult');
-  consultationForm = document.getElementById('consultationForm');
-  servicesGrid = document.getElementById('servicesGrid');
-  productsGrid = document.getElementById('productsGrid');
-  testimonialsCarousel = document.getElementById('testimonialsCarousel');
-  cartCount = document.querySelector('.cart-count');
-  
-  initializeNavigation();
-  populateServices();
-  populateProducts();
-  populateTestimonials();
-  initializeCalculator();
-  initializeForms();
-  initializeScrollAnimations();
-  initializeSmoothScroll();
-  updateCartCount();
-});
-
-// Navigation functionality
-function initializeNavigation() {
-  if (navToggle && navMenu) {
-    navToggle.addEventListener('click', function() {
-      navMenu.classList.toggle('show');
-      navToggle.classList.toggle('active');
-    });
-
-    // Close mobile menu when clicking on links
-    const navLinks = document.querySelectorAll('.nav__link');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        navMenu.classList.remove('show');
-        navToggle.classList.remove('active');
-        
-        // Handle smooth scrolling
-        e.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        scrollToSection(targetId);
-      });
-    });
-  }
-
-  // Header background on scroll
-  window.addEventListener('scroll', function() {
-    const header = document.querySelector('.header');
-    if (header) {
-      if (window.scrollY > 50) {
-        header.style.background = 'rgba(13, 13, 43, 0.98)';
-      } else {
-        header.style.background = 'rgba(13, 13, 43, 0.95)';
-      }
-    }
-  });
-}
-
-// Populate services section
-function populateServices() {
-  if (servicesGrid) {
-    const servicesHTML = appData.services.map(service => `
-      <div class="service-card" data-aos="fade-up">
-        <div class="service-card__icon">${service.icon}</div>
-        <h3>${service.title}</h3>
-        <p>${service.description}</p>
-        <div class="service-card__price">${service.price}</div>
-        <button class="btn btn--primary" onclick="bookService('${service.title}')">Learn More</button>
-      </div>
-    `).join('');
-    
-    servicesGrid.innerHTML = servicesHTML;
-  }
-}
-
-// Populate products section
-function populateProducts() {
-  if (productsGrid) {
-    const productsHTML = appData.products.map((product, index) => `
-      <div class="product-card" data-aos="fade-up" data-aos-delay="${index * 100}">
-        <div class="product-card__image">${product.icon}</div>
-        <div class="product-card__content">
-          <div class="product-card__category">${product.category}</div>
-          <h3>${product.name}</h3>
-          <div class="product-card__price">${product.price}</div>
-          <button class="btn btn--primary btn--full-width" onclick="addToCart('${product.name}', '${product.price}')">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    `).join('');
-    
-    productsGrid.innerHTML = productsHTML;
-  }
-}
-
-// Populate testimonials section
-function populateTestimonials() {
-  if (testimonialsCarousel) {
-    const testimonialsHTML = appData.testimonials.map((testimonial, index) => `
-      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="${index * 100}">
-        <div class="testimonial-rating">
-          ${'★'.repeat(testimonial.rating)}
-        </div>
-        <p class="testimonial-text">"${testimonial.text}"</p>
-        <div class="testimonial-author">- ${testimonial.name}</div>
-      </div>
-    `).join('');
-    
-    testimonialsCarousel.innerHTML = testimonialsHTML;
-  }
-}
-
-// Life path number calculator
-function initializeCalculator() {
-  if (calculatorForm && calculatorResult) {
-    calculatorForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const fullName = document.getElementById('fullName').value.trim();
-      const birthDate = document.getElementById('birthDate').value;
-      
-      if (!fullName || !birthDate) {
-        showNotification('Please fill in all fields');
-        return;
-      }
-      
-      // Add loading animation
-      const submitBtn = calculatorForm.querySelector('button');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Calculating...';
-      submitBtn.disabled = true;
-      
-      // Simulate calculation delay for better UX
-      setTimeout(() => {
-        const lifePathNumber = calculateLifePathNumber(birthDate);
-        displayResult(lifePathNumber, fullName);
-        
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-      }, 1500);
-    });
-  }
-}
-
-// Calculate life path number
-function calculateLifePathNumber(birthDate) {
-  const date = new Date(birthDate);
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  
-  // Sum all digits
-  let sum = reduceToSingleDigit(day) + reduceToSingleDigit(month) + reduceToSingleDigit(year);
-  
-  // Reduce to single digit (except master numbers 11, 22, 33)
-  while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
-    sum = reduceToSingleDigit(sum);
-  }
-  
-  return sum;
-}
-
-// Helper function to reduce number to single digit
-function reduceToSingleDigit(num) {
-  while (num > 9) {
-    num = num.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
-  }
-  return num;
-}
-
-// Display calculation result
-function displayResult(lifePathNumber, fullName) {
-  const meaning = lifePathMeanings[lifePathNumber] || "A unique and special path awaits you.";
-  
-  if (calculatorResult) {
-    calculatorResult.innerHTML = `
-      <h4>Hello ${fullName}!</h4>
-      <div class="result-number">${lifePathNumber}</div>
-      <div class="result-meaning">${meaning}</div>
-      <p style="margin-top: 16px; font-size: 14px; opacity: 0.8;">
-        For a complete reading with personalized insights, book a consultation with Pranjali.
-      </p>
-      <button class="btn btn--outline" onclick="scrollToSection('consultation')" style="margin-top: 16px;">
-        Book Full Reading
-      </button>
-    `;
-    
-    calculatorResult.classList.add('show');
-    
-    // Smooth scroll to result
-    setTimeout(() => {
-      calculatorResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 100);
-  }
-}
-
-// Form handling
-function initializeForms() {
-  if (consultationForm) {
-    consultationForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Get form data
-      const clientName = document.getElementById('clientName').value.trim();
-      const clientEmail = document.getElementById('clientEmail').value.trim();
-      const clientPhone = document.getElementById('clientPhone').value.trim();
-      const serviceType = document.getElementById('serviceType').value;
-      const preferredDate = document.getElementById('preferredDate').value;
-      
-      // Basic validation
-      if (!clientName || !clientEmail || !clientPhone || !serviceType || !preferredDate) {
-        showNotification('Please fill in all required fields');
-        return;
-      }
-      
-      if (!isValidEmail(clientEmail)) {
-        showNotification('Please enter a valid email address');
-        return;
-      }
-      
-      // Simulate form submission
-      const submitBtn = consultationForm.querySelector('button');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Scheduling...';
-      submitBtn.disabled = true;
-      
-      setTimeout(() => {
-        showNotification('Thank you! Your consultation request has been submitted. Pranjali will contact you within 24 hours.');
-        consultationForm.reset();
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-      }, 1000);
-    });
-  }
-  
-  // Newsletter subscription
-  const newsletterForm = document.querySelector('.newsletter');
-  if (newsletterForm) {
-    const newsletterBtn = newsletterForm.querySelector('button');
-    if (newsletterBtn) {
-      newsletterBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const emailInput = newsletterForm.querySelector('input');
-        const email = emailInput.value.trim();
-        
-        if (email && isValidEmail(email)) {
-          showNotification('Thank you for subscribing to our newsletter!');
-          emailInput.value = '';
-        } else {
-          showNotification('Please enter a valid email address.');
+    exchangeRate: 83,
+    currentCurrency: 'USD',
+    services: [
+        {
+            title: "Personal Numerology Reading",
+            description: "Comprehensive analysis of your life path, destiny, and soul numbers",
+            priceUSD: 150,
+            priceINR: 12450
+        },
+        {
+            title: "Business Numerology",
+            description: "Optimize your business name and launch dates for success",
+            priceUSD: 200,
+            priceINR: 16600
+        },
+        {
+            title: "Relationship Compatibility",
+            description: "Discover numerical harmony between partners",
+            priceUSD: 125,
+            priceINR: 10375
+        },
+        {
+            title: "Name Analysis & Correction",
+            description: "Find the perfect name vibration for positive energy",
+            priceUSD: 100,
+            priceINR: 8300
         }
-      });
-    }
-  }
-}
+    ],
+    testimonials: [
+        {
+            name: "Sarah M.",
+            text: "Pranjali's numerology reading changed my perspective on life completely!",
+            rating: 5
+        },
+        {
+            name: "David L.",
+            text: "Professional, accurate, and incredibly insightful. Highly recommended!",
+            rating: 5
+        },
+        {
+            name: "Maria R.",
+            text: "The business numerology consultation helped me choose the perfect company name.",
+            rating: 5
+        }
+    ]
+};
 
-// Email validation
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-// Shopping cart functionality
-function addToCart(productName, price) {
-  cart.push({ name: productName, price: price });
-  updateCartCount();
-  
-  // Show success message
-  showNotification(`${productName} added to cart!`);
-}
-
-function updateCartCount() {
-  if (cartCount) {
-    cartCount.textContent = cart.length;
-    
-    if (cart.length > 0) {
-      cartCount.style.display = 'flex';
-      cartCount.style.opacity = '1';
+// Currency conversion functions
+function formatPrice(amount, currency) {
+    if (currency === 'USD') {
+        return `$${amount}`;
     } else {
-      cartCount.style.display = 'none';
-      cartCount.style.opacity = '0';
+        return `₹${amount.toLocaleString('en-IN')}`;
     }
-  }
 }
 
-// Notification system
-function showNotification(message) {
-  // Remove any existing notifications
-  const existingNotifications = document.querySelectorAll('.notification');
-  existingNotifications.forEach(notif => notif.remove());
-  
-  // Create notification element
-  const notification = document.createElement('div');
-  notification.className = 'notification';
-  notification.style.cssText = `
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    background: linear-gradient(45deg, #4A148C, #7B1FA2);
-    color: white;
-    padding: 16px 24px;
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
-    z-index: 10000;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    max-width: 300px;
-    font-size: 14px;
-    line-height: 1.4;
-  `;
-  notification.textContent = message;
-  
-  document.body.appendChild(notification);
-  
-  // Animate in
-  setTimeout(() => {
-    notification.style.transform = 'translateX(0)';
-  }, 100);
-  
-  // Remove after 4 seconds
-  setTimeout(() => {
-    notification.style.transform = 'translateX(100%)';
-    setTimeout(() => {
-      if (notification.parentNode) {
-        notification.parentNode.removeChild(notification);
-      }
-    }, 300);
-  }, 4000);
-}
-
-// Book service function
-function bookService(serviceName) {
-  const serviceSelect = document.getElementById('serviceType');
-  if (serviceSelect) {
-    const serviceOptions = serviceSelect.querySelectorAll('option');
+function updateAllPrices(newCurrency) {
+    const priceElements = document.querySelectorAll('.price');
     
-    // Find and select the matching service
-    for (let option of serviceOptions) {
-      if (option.textContent.includes(serviceName.split(' ')[0])) {
-        serviceSelect.value = option.value;
-        break;
-      }
-    }
-  }
-  
-  // Scroll to consultation section
-  scrollToSection('consultation');
-}
-
-// Scroll animations
-function initializeScrollAnimations() {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-  
-  const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, observerOptions);
-  
-  // Observe elements with data-aos attribute
-  const animatedElements = document.querySelectorAll('[data-aos]');
-  animatedElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-  });
-}
-
-// Smooth scrolling for navigation links
-function initializeSmoothScroll() {
-  // Handle hero section buttons
-  const heroButtons = document.querySelectorAll('.hero__buttons a');
-  heroButtons.forEach(button => {
-    button.addEventListener('click', function(e) {
-      e.preventDefault();
-      const href = this.getAttribute('href');
-      if (href.startsWith('#')) {
-        const targetId = href.substring(1);
-        scrollToSection(targetId);
-      }
-    });
-  });
-  
-  // Handle all anchor links
-  const allAnchorLinks = document.querySelectorAll('a[href^="#"]');
-  allAnchorLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href').substring(1);
-      scrollToSection(targetId);
-    });
-  });
-}
-
-// Scroll to section function
-function scrollToSection(sectionId) {
-  const targetElement = document.getElementById(sectionId);
-  if (targetElement) {
-    const header = document.querySelector('.header');
-    const headerHeight = header ? header.offsetHeight : 80;
-    const targetPosition = targetElement.offsetTop - headerHeight - 20;
-    
-    window.scrollTo({
-      top: Math.max(0, targetPosition),
-      behavior: 'smooth'
-    });
-  }
-}
-
-// Add parallax effect to hero section
-window.addEventListener('scroll', function() {
-  const scrolled = window.pageYOffset;
-  const hero = document.querySelector('.hero');
-  
-  if (hero && scrolled < window.innerHeight) {
-    const rate = scrolled * -0.3;
-    hero.style.transform = `translateY(${rate}px)`;
-  }
-});
-
-// Add hover effects for interactive elements
-document.addEventListener('DOMContentLoaded', function() {
-  // Add ripple effect to buttons
-  setTimeout(() => {
-    const buttons = document.querySelectorAll('.btn--primary');
-    
-    buttons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
+    priceElements.forEach(element => {
+        const usdPrice = parseFloat(element.getAttribute('data-usd'));
+        const inrPrice = parseFloat(element.getAttribute('data-inr'));
         
-        ripple.style.cssText = `
-          position: absolute;
-          width: ${size}px;
-          height: ${size}px;
-          left: ${x}px;
-          top: ${y}px;
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 50%;
-          transform: scale(0);
-          animation: ripple 0.6s ease-out;
-          pointer-events: none;
-        `;
-        
-        this.appendChild(ripple);
+        // Add updating class for animation
+        element.classList.add('updating');
         
         setTimeout(() => {
-          if (ripple.parentNode) {
-            ripple.parentNode.removeChild(ripple);
-          }
-        }, 600);
-      });
+            if (newCurrency === 'USD') {
+                element.textContent = formatPrice(usdPrice, 'USD');
+            } else {
+                element.textContent = formatPrice(inrPrice, 'INR');
+            }
+            
+            // Remove updating class after animation
+            setTimeout(() => {
+                element.classList.remove('updating');
+            }, 300);
+        }, 150);
     });
-  }, 1000);
-});
+    
+    // Update service select options
+    updateServiceSelectPrices(newCurrency);
+}
 
-// Add ripple animation keyframes
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes ripple {
-    from {
-      transform: scale(0);
-      opacity: 1;
+function updateServiceSelectPrices(currency) {
+    const serviceSelect = document.getElementById('serviceSelect');
+    const options = serviceSelect.querySelectorAll('option[value]:not([value=""])');
+    
+    options.forEach((option, index) => {
+        const service = appData.services[index];
+        const price = currency === 'USD' ? 
+            formatPrice(service.priceUSD, 'USD') : 
+            formatPrice(service.priceINR, 'INR');
+        
+        const serviceTitle = service.title.replace('Numerology Reading', 'Reading')
+                                      .replace('& Correction', '');
+        option.innerHTML = `${serviceTitle} - ${price}`;
+    });
+}
+
+// Numerology calculation functions
+function calculateLifePathNumber(birthDate) {
+    const date = new Date(birthDate);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    
+    let sum = day + month + year;
+    
+    // Reduce to single digit (except master numbers 11, 22, 33)
+    while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
+        sum = sum.toString().split('').reduce((acc, digit) => acc + parseInt(digit), 0);
     }
-    to {
-      transform: scale(2);
-      opacity: 0;
+    
+    return sum;
+}
+
+function calculateDestinyNumber(fullName) {
+    const nameMap = {
+        'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8, 'I': 9,
+        'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'O': 6, 'P': 7, 'Q': 8, 'R': 9,
+        'S': 1, 'T': 2, 'U': 3, 'V': 4, 'W': 5, 'X': 6, 'Y': 7, 'Z': 8
+    };
+    
+    const cleanName = fullName.toUpperCase().replace(/[^A-Z]/g, '');
+    let sum = 0;
+    
+    for (let char of cleanName) {
+        sum += nameMap[char] || 0;
     }
-  }
-`;
-document.head.appendChild(style);
+    
+    // Reduce to single digit (except master numbers)
+    while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
+        sum = sum.toString().split('').reduce((acc, digit) => acc + parseInt(digit), 0);
+    }
+    
+    return sum;
+}
+
+function getNumberInterpretation(number, type) {
+    const interpretations = {
+        lifePath: {
+            1: "You are a natural leader with strong independence and pioneering spirit.",
+            2: "You are diplomatic, cooperative, and work well in partnerships.",
+            3: "You are creative, expressive, and have excellent communication skills.",
+            4: "You are practical, organized, and value stability and hard work.",
+            5: "You are adventurous, freedom-loving, and embrace change.",
+            6: "You are nurturing, responsible, and focused on home and family.",
+            7: "You are analytical, spiritual, and seek deeper truths.",
+            8: "You are ambitious, business-minded, and focused on material success.",
+            9: "You are humanitarian, generous, and focused on serving others.",
+            11: "You are intuitive, inspirational, and have strong spiritual awareness.",
+            22: "You are a master builder with the ability to turn dreams into reality.",
+            33: "You are a master teacher with exceptional healing and teaching abilities."
+        },
+        destiny: {
+            1: "Your destiny involves leadership and breaking new ground.",
+            2: "Your destiny involves cooperation and bringing people together.",
+            3: "Your destiny involves creative expression and inspiring others.",
+            4: "Your destiny involves building solid foundations for others.",
+            5: "Your destiny involves promoting freedom and progressive ideas.",
+            6: "Your destiny involves nurturing and caring for others.",
+            7: "Your destiny involves research, analysis, and spiritual teaching.",
+            8: "Your destiny involves business leadership and material achievement.",
+            9: "Your destiny involves humanitarian service and global awareness.",
+            11: "Your destiny involves spiritual enlightenment and inspiration.",
+            22: "Your destiny involves creating lasting change on a large scale.",
+            33: "Your destiny involves healing and uplifting humanity."
+        }
+    };
+    
+    return interpretations[type][number] || "This number carries special significance in your life.";
+}
+
+// Testimonial carousel functionality
+let currentTestimonial = 0;
+
+function showTestimonial(index) {
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    const testimonialBtns = document.querySelectorAll('.testimonial-btn');
+    
+    testimonialCards.forEach(card => card.classList.remove('active'));
+    testimonialBtns.forEach(btn => btn.classList.remove('active'));
+    
+    testimonialCards[index].classList.add('active');
+    testimonialBtns[index].classList.add('active');
+    
+    currentTestimonial = index;
+}
+
+function nextTestimonial() {
+    const nextIndex = (currentTestimonial + 1) % appData.testimonials.length;
+    showTestimonial(nextIndex);
+}
+
+// Form validation and submission
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function validatePhone(phone) {
+    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+    return phoneRegex.test(phone.replace(/\s/g, ''));
+}
+
+function showNotification(message, type = 'success') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification--${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#2d4a2b' : '#4a2d2b'};
+        color: white;
+        padding: 16px 24px;
+        border-radius: 8px;
+        border: 1px solid ${type === 'success' ? '#4ade80' : '#ef4444'};
+        z-index: 10000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 10);
+    
+    // Remove after 5 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 5000);
+}
+
+function scrollToSection(sectionId) {
+    const section = document.querySelector(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// Initialize application
+function initializeApp() {
+    // Set minimum date for booking form to today
+    const today = new Date().toISOString().split('T')[0];
+    const preferredDateInput = document.getElementById('preferredDate');
+    if (preferredDateInput) {
+        preferredDateInput.setAttribute('min', today);
+    }
+    
+    // Currency selector event listener
+    const currencySelect = document.getElementById('currencySelect');
+    if (currencySelect) {
+        currencySelect.addEventListener('change', function() {
+            appData.currentCurrency = this.value;
+            updateAllPrices(this.value);
+        });
+        
+        // Initialize with default currency
+        updateAllPrices(appData.currentCurrency);
+    }
+    
+    // Calculator functionality
+    const calculateBtn = document.getElementById('calculateBtn');
+    if (calculateBtn) {
+        calculateBtn.addEventListener('click', function() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const birthDate = document.getElementById('birthDate').value;
+            
+            if (!fullName || !birthDate) {
+                showNotification('Please enter both your name and birth date.', 'error');
+                return;
+            }
+            
+            const lifePathNumber = calculateLifePathNumber(birthDate);
+            const destinyNumber = calculateDestinyNumber(fullName);
+            
+            const resultContent = document.getElementById('resultContent');
+            const resultDiv = document.getElementById('calculatorResult');
+            
+            resultContent.innerHTML = `
+                <div class="number-result">
+                    <h5>Life Path Number: ${lifePathNumber}</h5>
+                    <p>${getNumberInterpretation(lifePathNumber, 'lifePath')}</p>
+                </div>
+                <div class="number-result" style="margin-top: 20px;">
+                    <h5>Destiny Number: ${destinyNumber}</h5>
+                    <p>${getNumberInterpretation(destinyNumber, 'destiny')}</p>
+                </div>
+                <div class="consultation-cta" style="margin-top: 24px; text-align: center; padding: 20px; background: rgba(255, 215, 0, 0.1); border-radius: 8px; border: 1px solid var(--mystical-gold);">
+                    <p style="color: var(--mystical-gold); margin-bottom: 16px;">Want a detailed analysis?</p>
+                    <button class="btn btn--primary" onclick="scrollToSection('#services')">
+                        Book Full Reading - ${appData.currentCurrency === 'USD' ? '$150' : '₹12,450'}
+                    </button>
+                </div>
+            `;
+            
+            resultDiv.classList.remove('hidden');
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+    
+    // Testimonial navigation
+    const testimonialBtns = document.querySelectorAll('.testimonial-btn');
+    testimonialBtns.forEach((btn, index) => {
+        btn.addEventListener('click', () => showTestimonial(index));
+    });
+    
+    // Auto-rotate testimonials
+    setInterval(nextTestimonial, 5000);
+    
+    // Booking form submission
+    const bookingForm = document.getElementById('bookingForm');
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                service: document.getElementById('serviceSelect').value,
+                date: document.getElementById('preferredDate').value,
+                name: document.getElementById('clientName').value.trim(),
+                email: document.getElementById('clientEmail').value.trim(),
+                phone: document.getElementById('clientPhone').value.trim(),
+                notes: document.getElementById('clientNotes').value.trim()
+            };
+            
+            // Validation
+            if (!formData.service) {
+                showNotification('Please select a service.', 'error');
+                return;
+            }
+            
+            if (!formData.date) {
+                showNotification('Please select a preferred date.', 'error');
+                return;
+            }
+            
+            if (!formData.name) {
+                showNotification('Please enter your full name.', 'error');
+                return;
+            }
+            
+            if (!validateEmail(formData.email)) {
+                showNotification('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            if (!validatePhone(formData.phone)) {
+                showNotification('Please enter a valid phone number.', 'error');
+                return;
+            }
+            
+            // Simulate form submission
+            showNotification('Thank you! Your consultation request has been submitted. I will contact you within 24 hours to confirm your appointment.');
+            
+            // Reset form
+            bookingForm.reset();
+        });
+    }
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            scrollToSection(targetId);
+        });
+    });
+    
+    // Hero buttons functionality
+    document.querySelectorAll('.hero-buttons .btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            if (this.textContent.includes('Free Calculator')) {
+                scrollToSection('#tools');
+            } else if (this.textContent.includes('Book Consultation')) {
+                scrollToSection('.booking');
+            }
+        });
+    });
+    
+    // Header consultation button
+    document.querySelector('.header .btn--primary').addEventListener('click', function() {
+        scrollToSection('.booking');
+    });
+    
+    // Mobile menu toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('.nav');
+    
+    if (mobileMenuToggle && nav) {
+        mobileMenuToggle.addEventListener('click', function() {
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            if (nav.style.display === 'flex') {
+                nav.style.position = 'absolute';
+                nav.style.top = '100%';
+                nav.style.left = '0';
+                nav.style.right = '0';
+                nav.style.background = 'var(--cosmic-dark)';
+                nav.style.flexDirection = 'column';
+                nav.style.padding = '20px';
+                nav.style.borderTop = '1px solid var(--mystical-gold)';
+            }
+        });
+    }
+    
+    // Newsletter subscription
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value.trim();
+            
+            if (!validateEmail(email)) {
+                showNotification('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            showNotification('Thank you for subscribing to my newsletter!');
+            this.reset();
+        });
+    }
+    
+    // Add to cart functionality
+    document.querySelectorAll('.product-card .btn--outline').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const productCard = this.closest('.product-card');
+            const productName = productCard.querySelector('h3').textContent;
+            const priceElement = productCard.querySelector('.price');
+            const price = priceElement.textContent;
+            
+            showNotification(`${productName} (${price}) added to cart!`);
+            
+            // Update cart icon with animation
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                cartIcon.style.transform = 'scale(1)';
+            }, 200);
+        });
+    });
+    
+    // Service booking buttons
+    document.querySelectorAll('.service-card .btn--primary').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const serviceCard = this.closest('.service-card');
+            const serviceName = serviceCard.querySelector('h3').textContent;
+            
+            // Pre-select the service in booking form
+            const serviceSelect = document.getElementById('serviceSelect');
+            const options = Array.from(serviceSelect.options);
+            const matchingOption = options.find(option => 
+                option.textContent.toLowerCase().includes(serviceName.toLowerCase().split(' ')[0].toLowerCase())
+            );
+            
+            if (matchingOption) {
+                serviceSelect.value = matchingOption.value;
+            }
+            
+            // Scroll to booking section
+            scrollToSection('.booking');
+        });
+    });
+    
+    // Header scroll effect
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.header');
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scrolling down
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            // Scrolling up
+            header.style.transform = 'translateY(0)';
+        }
+        lastScrollTop = scrollTop;
+    });
+}
+
+// Make scrollToSection available globally
+window.scrollToSection = scrollToSection;
+
+// Initialize the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeApp);
