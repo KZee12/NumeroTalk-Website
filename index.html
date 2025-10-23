@@ -9,73 +9,99 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <h2>Pranjali Zope - Certified Numerologist</h2>
-                </div>
-                
-                <nav class="nav">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#services">Services</a>
-                    <a href="#tools">Tools</a>
-                    <a href="#shop">Shop</a>
-                    <a href="#testimonials">Testimonials</a>
-                    <a href="#contact">Contact</a>
-                </nav>
-                
-                <div class="header-actions">
-                    <div class="currency-selector">
-                        <select id="currencySelect" class="form-control currency-select">
-                            <option value="USD">USD ($)</option>
-                            <option value="INR">INR (₹)</option>
-                        </select>
-                    </div>
-                    <div class="cart-icon">🛒</div>
-                    <button class="btn btn--primary">Book Consultation</button>
-                </div>
-                
-                <div class="mobile-menu-toggle">☰</div>
+        <nav class="nav container">
+            <div class="nav__brand">
+                <img src="Logo.jpg" alt="NumeroTalk - Your Cosmic Guide" class="nav__logo">
+                <span class="nav__subtitle">Certified Numerologist</span>
             </div>
-        </div>
+            <ul class="nav__menu">
+                <li><a href="#about" class="nav__link nav__link--active">About</a></li>
+                <li><a href="#services" class="nav__link">Services</a></li>
+                <li><a href="#calculator" class="nav__link">Numerology Calculator</a></li>
+                <li><a href="#shop" class="nav__link">Shop</a></li>
+                <li><a href="#testimonials" class="nav__link">Testimonials</a></li>
+                <li><a href="#contact" class="nav__link">Contact</a></li>
+            </ul>
+            <div class="nav__actions">
+                <button class="cart-toggle btn btn--outline btn--sm" onclick="toggleCart()">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                    (<span id="cart-count">0</span>)
+                </button>
+                <a href="#consultation" class="btn btn--primary btn--glow nav__cta">Book Consultation</a>
+            </div>
+        </nav>
     </header>
 
+    <!-- Floating Particles -->
+    <div class="cosmic-particles" id="cosmic-particles"></div>
+    <div class="floating-mystical-symbols" id="mystical-symbols"></div>
+
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="cosmic-bg"></div>
+    <section class="hero" id="about">
+        <div class="hero__cosmic-bg">
+            <div class="cosmic-orb cosmic-orb--1"></div>
+            <div class="cosmic-orb cosmic-orb--2"></div>
+            <div class="cosmic-orb cosmic-orb--3"></div>
+            <div class="nebula-effect"></div>
+            <!-- Geometric Circles and Floating Numbers -->
+            <div class="geometric-circles">
+                <div class="geometric-circle geometric-circle--purple"></div>
+                <div class="geometric-circle geometric-circle--gold-ring"></div>
+                <div class="floating-numbers">
+                    <span class="floating-number floating-number--1">1</span>
+                    <span class="floating-number floating-number--3">3</span>
+                    <span class="floating-number floating-number--5">5</span>
+                    <span class="floating-number floating-number--7">7</span>
+                    <span class="floating-number floating-number--9">9</span>
+                </div>
+            </div>
+        </div>
         <div class="container">
-            <div class="hero-content">
-                <h1>Unlock Your Life's Hidden Patterns Through Numbers</h1>
-                <p>Certified numerologist with over 10 years of experience helping people discover their true potential through the ancient science of numbers</p>
-                <div class="hero-buttons">
-                    <button class="btn btn--primary btn--lg">Free Calculator</button>
-                    <button class="btn btn--outline btn--lg">Book Consultation</button>
+            <div class="hero__content">
+                <div class="hero__text">
+                    <h2 class="hero__title bright-gold-text"><span class="bright-gold-part">Unlock Your Life's</span> <span class="white-shadow-text">Hidden Patterns Through Numbers</span></h2>
+                    <p class="hero__description">Professional numerology guidance from certified expert Pranjali Zope</p>
+                    <div class="hero__cta-buttons">
+                        <a href="#calculator" class="btn btn--primary btn--glow btn--magnetic">Free Number Calculator</a>
+                        <a href="#consultation" class="btn btn--outline btn--mystical btn--golden">Book Consultation</a>
+                    </div>
+                </div>
+                <div class="hero__image">
+                    <div class="portrait-container">
+                        <div class="portrait-frame">
+                            <img src="Pranjali-Zope.jpg" alt="Pranjali Zope - Certified Numerologist" class="portrait-image">
+                        </div>
+                        <div class="portrait-title">
+                            <h2 class="portrait-name">Pranjali Zope</h2>
+                            <p class="portrait-subtitle">Certified Numerologist</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- Credentials Section -->
+    <section class="credentials">
         <div class="container">
-            <div class="about-content">
-                <div class="about-image">
-                    <div class="image-placeholder">Pranjali Zope</div>
+            <h3 class="section__title">Professional Credentials</h3>
+            <div class="credentials__grid">
+                <div class="credential-card">
+                    <div class="certificate-container">
+                        <img src="Numerology-cert.jpg" alt="Certified Numerologist Certificate" class="certificate-image">
+                    </div>
+                    <div class="credential__content">
+                        <h4>Certified Numerologist</h4>
+                    </div>
                 </div>
-                <div class="about-text">
-                    <h2>About Pranjali Zope</h2>
-                    <p>Certified Numerologist with Advanced Certification from the International Numerology Association. With over a decade of experience, I have helped thousands of clients understand their life purpose, make better decisions, and create positive changes through the power of numbers.</p>
-                    <div class="credentials">
-                        <div class="credential">
-                            <strong>✓</strong> Certified Numerologist (INA)
-                        </div>
-                        <div class="credential">
-                            <strong>✓</strong> 10+ Years Experience
-                        </div>
-                        <div class="credential">
-                            <strong>✓</strong> 5000+ Successful Readings
-                        </div>
+                <div class="credential-card">
+                    <div class="certificate-container">
+                        <img src="Yantra-Cert.jpg" alt="Certified Yantras Expert Certificate" class="certificate-image">
+                    </div>
+                    <div class="credential__content">
+                        <h4>Certified Yantras Expert</h4>
                     </div>
                 </div>
             </div>
@@ -83,199 +109,346 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="services">
+    <section class="services" id="services">
         <div class="container">
-            <h2 class="section-title">My Services</h2>
-            <div class="services-grid">
+            <h3 class="section__title">Numerology Services</h3>
+            <div class="services__grid">
                 <div class="service-card">
-                    <h3>Personal Numerology Reading</h3>
-                    <p>Comprehensive analysis of your life path, destiny, and soul numbers</p>
-                    <div class="price" data-usd="25" data-inr="2000">$25</div>
-                    <button class="btn btn--primary">Book Now</button>
+                    <div class="service__icon">✨</div>
+                    <h4 class="service__title">Life Path Reading</h4>
+                    <p class="service__description">Discover your life's purpose and destiny through comprehensive numerological analysis</p>
+                    <div class="service__price">₹2,000</div>
+                    <button class="btn btn--primary" onclick="bookService('Life Path Reading', 2000)">Book Now</button>
                 </div>
                 <div class="service-card">
-                    <h3>Business Numerology</h3>
-                    <p>Optimize your business name and launch dates for success</p>
-                    <div class="price" data-usd="200" data-inr="16600">$200</div>
-                    <button class="btn btn--primary">Book Now</button>
+                    <div class="service__icon">👑</div>
+                    <h4 class="service__title">Business Numerology</h4>
+                    <p class="service__description">Optimize your business success with powerful numerological insights</p>
+                    <div class="service__price">₹3,000</div>
+                    <button class="btn btn--primary" onclick="bookService('Business Numerology', 3000)">Book Now</button>
                 </div>
                 <div class="service-card">
-                    <h3>Relationship Compatibility</h3>
-                    <p>Discover numerical harmony between partners</p>
-                    <div class="price" data-usd="125" data-inr="10375">$125</div>
-                    <button class="btn btn--primary">Book Now</button>
+                    <div class="service__icon">💫</div>
+                    <h4 class="service__title">Matchmaking</h4>
+                    <p class="service__description">Find your perfect partner through numerical compatibility analysis</p>
+                    <div class="service__price">₹2,000</div>
+                    <button class="btn btn--primary" onclick="bookService('Matchmaking', 2000)">Book Now</button>
                 </div>
                 <div class="service-card">
-                    <h3>Name Analysis & Correction</h3>
-                    <p>Find the perfect name vibration for positive energy</p>
-                    <div class="price" data-usd="100" data-inr="8300">$100</div>
-                    <button class="btn btn--primary">Book Now</button>
+                    <div class="service__icon">🔮</div>
+                    <h4 class="service__title">Prashna Kundali</h4>
+                    <p class="service__description">Get answers to specific questions through ancient Vedic numerology techniques</p>
+                    <div class="service__price">₹1,500</div>
+                    <button class="btn btn--primary" onclick="bookService('Prashna Kundali', 1500)">Book Now</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Interactive Tools Section -->
-    <section id="tools" class="tools">
+    <!-- Tools Section -->
+    <section class="tools" id="calculator">
         <div class="container">
-            <h2 class="section-title">Free Numerology Calculator</h2>
-            <div class="calculator-card">
-                <h3>Calculate Your Life Path Number</h3>
-                <div class="calculator-form">
-                    <div class="form-group">
-                        <label class="form-label">Your Full Name</label>
-                        <input type="text" id="fullName" class="form-control" placeholder="Enter your full name">
+            <h3 class="section__title">Numerology Calculator</h3>
+            <div class="calculator-container">
+                <div class="calculator-card">
+                    <div class="calculator__header">
+                        <div class="floating-number">9</div>
+                        <div class="floating-number">3</div>
+                        <div class="floating-number">7</div>
+                        <h4>Life Path Number Calculator</h4>
+                        <p>Discover your life path number and unlock the secrets of your destiny</p>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Date of Birth</label>
-                        <input type="date" id="birthDate" class="form-control">
+                    <form id="calculator-form" class="calculator__form">
+                        <div class="form-group">
+                            <label for="full-name" class="form-label">Full Name</label>
+                            <input type="text" id="full-name" name="fullName" class="form-control" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="birth-date" class="form-label">Date of Birth</label>
+                            <input type="date" id="birth-date" name="birthDate" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full-width calculator__submit">
+                            <span class="btn-text">Calculate My Life Path</span>
+                            <span class="btn-ripple"></span>
+                        </button>
+                    </form>
+                    <div id="calculator-result" class="calculator__result hidden">
+                        <div class="result-animation">
+                            <div class="result-circle">
+                                <span id="life-path-number" class="life-path-number"></span>
+                            </div>
+                        </div>
+                        <div class="result-content">
+                            <h5 id="result-title"></h5>
+                            <p id="result-description"></p>
+                            <div class="result-actions">
+                                <button onclick="scrollToConsultation()" class="btn btn--primary">
+                                    Book Full Reading
+                                </button>
+                                <button onclick="resetCalculator()" class="btn btn--outline">
+                                    Calculate Again
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <button id="calculateBtn" class="btn btn--primary btn--lg">Calculate My Numbers</button>
-                </div>
-                <div id="calculatorResult" class="calculator-result hidden">
-                    <h4>Your Numerology Profile</h4>
-                    <div id="resultContent"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section id="shop" class="products">
+    <section class="products" id="shop">
         <div class="container">
-            <h2 class="section-title">Numerology Products</h2>
-            <div class="products-grid">
+            <h3 class="section__title">Spiritual Products</h3>
+            <div class="products__grid">
                 <div class="product-card">
-                    <div class="product-image">📚</div>
-                    <h3>Numerology Guide Book</h3>
-                    <div class="price" data-usd="29.99" data-inr="2489">$29.99</div>
-                    <button class="btn btn--outline">Add to Cart</button>
+                    <div class="product__image-container">
+                        <img src="Aura-water-g.jpg" alt="Aura Water - 300ml energetically charged water" class="product-image">
+                    </div>
+                    <div class="product__content">
+                        <h4 class="product__title">Aura Water</h4>
+                        <p class="product__description">Energetically charged water to enhance your aura and positive vibrations</p>
+                        <div class="product__volume">300 ml</div>
+                        <div class="product__price">₹399 <span class="product__price-secondary">($4.99)</span></div>
+                        <button class="btn btn--primary" onclick="addToCart('Aura Water', 399, '300 ml')">Add to Cart</button>
+                    </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-image">💎</div>
-                    <h3>Crystal Set for Numbers 1-9</h3>
-                    <div class="price" data-usd="89.99" data-inr="7469">$89.99</div>
-                    <button class="btn btn--outline">Add to Cart</button>
+                    <div class="product__image-container">
+                        <img src="Wealth-oil-g.jpg" alt="Wealth Oil - 50ml prosperity oil" class="product-image">
+                    </div>
+                    <div class="product__content">
+                        <h4 class="product__title">Wealth Oil</h4>
+                        <p class="product__description">Sacred oil blend designed to attract prosperity and abundance</p>
+                        <div class="product__volume">50 ml</div>
+                        <div class="product__price">₹249 <span class="product__price-secondary">($3.49)</span></div>
+                        <button class="btn btn--primary" onclick="addToCart('Wealth Oil', 249, '50 ml')">Add to Cart</button>
+                    </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-image">📊</div>
-                    <h3>Personal Number Chart</h3>
-                    <div class="price" data-usd="49.99" data-inr="4149">$49.99</div>
-                    <button class="btn btn--outline">Add to Cart</button>
+                    <div class="product__image-container">
+                        <div class="placeholder-image">
+                            <span>Photo Coming Soon</span>
+                        </div>
+                    </div>
+                    <div class="product__content">
+                        <h4 class="product__title">Cosmic Yantra</h4>
+                        <p class="product__description">Powerful geometric symbols for meditation and spiritual protection</p>
+                        <div class="product__price">₹499 <span class="product__price-secondary">($5.99)</span></div>
+                        <button class="btn btn--primary" onclick="addToCart('Cosmic Yantra', 499)">Add to Cart</button>
+                    </div>
                 </div>
-                <div class="product-card">
-                    <div class="product-image">💻</div>
-                    <h3>Digital Numerology Course</h3>
-                    <div class="price" data-usd="199.99" data-inr="16599">$199.99</div>
-                    <button class="btn btn--outline">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal hidden">
+        <div class="cart-modal__backdrop" onclick="closeCart()"></div>
+        <div class="cart-modal__content">
+            <div class="cart-modal__header">
+                <h3>Shopping Cart</h3>
+                <button class="cart-modal__close" onclick="closeCart()">&times;</button>
+            </div>
+            <div class="cart-modal__body">
+                <div id="cart-items"></div>
+                <div class="cart-total">
+                    <strong>Total: ₹<span id="cart-total">0</span></strong>
+                </div>
+            </div>
+            <div class="cart-modal__footer">
+                <button class="btn btn--secondary" onclick="clearCart()">Clear Cart</button>
+                <button class="btn btn--primary" onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Consultation Booking Section -->
+    <section class="consultation" id="consultation">
+        <div class="container">
+            <div class="consultation-container">
+                <div class="consultation__header">
+                    <div class="mystical-bg"></div>
+                    <h3 class="section__title">Book Your Personal Consultation</h3>
+                    <p class="consultation__subtitle">Ready to unlock the deeper mysteries of your numerological blueprint? Schedule a personalized session with Pranjali.</p>
+                </div>
+                <form id="consultation-form" class="consultation__form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="client-name" class="form-label">Full Name *</label>
+                            <input type="text" id="client-name" name="clientName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="client-email" class="form-label">Email Address *</label>
+                            <input type="email" id="client-email" name="clientEmail" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="client-phone" class="form-label">Phone Number *</label>
+                            <input type="tel" id="client-phone" name="clientPhone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="consultation-type" class="form-label">Consultation Type *</label>
+                            <select id="consultation-type" name="consultationType" class="form-control" required>
+                                <option value="">Select a service...</option>
+                                <option value="life-path">Life Path Reading - ₹2,000</option>
+                                <option value="business">Business Numerology - ₹3,000</option>
+                                <option value="matchmaking">Matchmaking - ₹2,000</option>
+                                <option value="prashna">Prashna Kundali - ₹1,500</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-dob" class="form-label">Date of Birth *</label>
+                        <input type="date" id="client-dob" name="clientDob" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="consultation-message" class="form-label">Message (Optional)</label>
+                        <textarea id="consultation-message" name="message" class="form-control" rows="4" placeholder="Tell me about your specific questions or what you'd like to focus on during our session..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--full-width consultation__submit">
+                        <span class="btn-text">Book My Consultation</span>
+                        <span class="btn-ripple"></span>
+                    </button>
+                </form>
+                <div id="consultation-success" class="consultation__success hidden">
+                    <div class="success-animation">
+                        <div class="success-circle">
+                            ✓
+                        </div>
+                    </div>
+                    <h4>Consultation Booked Successfully!</h4>
+                    <p>Thank you for booking your numerology consultation. You will receive a confirmation email shortly with the session details and payment instructions.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
+    <section class="testimonials" id="testimonials">
         <div class="container">
-            <h2 class="section-title">What My Clients Say</h2>
-            <div class="testimonials-carousel">
-                <div class="testimonial-card active">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Pranjali's numerology reading changed my perspective on life completely!"</p>
-                    <div class="client-name">- Sarah M.</div>
+            <h3 class="section__title">What My Clients Say</h3>
+            <div class="testimonials__container">
+                <div class="testimonials__carousel" id="testimonials-carousel">
+                    <div class="testimonial-card active">
+
+                        <blockquote class="testimonial__quote">
+                            "Pranjali's reading was life-changing! Her insights helped me understand my purpose and make important career decisions with confidence."
+                        </blockquote>
+                        <div class="testimonial__author">
+                            <div class="testimonial__avatar">M</div>
+                            <div class="testimonial__info">
+                                <div class="testimonial__name">Meera Sharma</div>
+                                <div class="testimonial__service">Life Path Reading</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+
+                        <blockquote class="testimonial__quote">
+                            "The business numerology consultation helped us choose the perfect name and launch date. Our company has grown 300% since!"
+                        </blockquote>
+                        <div class="testimonial__author">
+                            <div class="testimonial__avatar">R</div>
+                            <div class="testimonial__info">
+                                <div class="testimonial__name">Rahul Verma</div>
+                                <div class="testimonial__service">Business Numerology</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+
+                        <blockquote class="testimonial__quote">
+                            "The matchmaking analysis revealed so much about our relationship dynamics. It's helped us navigate challenges with understanding."
+                        </blockquote>
+                        <div class="testimonial__author">
+                            <div class="testimonial__avatar">A</div>
+                            <div class="testimonial__info">
+                                <div class="testimonial__name">Anjali &amp; Rohan</div>
+                                <div class="testimonial__service">Matchmaking</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Professional, accurate, and incredibly insightful. Highly recommended!"</p>
-                    <div class="client-name">- David L.</div>
+                <div class="testimonials__navigation">
+                    <button class="testimonial__nav testimonial__nav--prev" onclick="previousTestimonial()" aria-label="Previous testimonial">‹</button>
+                    <div class="testimonials__indicators">
+                        <button class="testimonial__indicator active" onclick="showTestimonial(0)" aria-label="Show testimonial 1"></button>
+                        <button class="testimonial__indicator" onclick="showTestimonial(1)" aria-label="Show testimonial 2"></button>
+                        <button class="testimonial__indicator" onclick="showTestimonial(2)" aria-label="Show testimonial 3"></button>
+                    </div>
+                    <button class="testimonial__nav testimonial__nav--next" onclick="nextTestimonial()" aria-label="Next testimonial">›</button>
                 </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"The business numerology consultation helped me choose the perfect company name."</p>
-                    <div class="client-name">- Maria R.</div>
-                </div>
-            </div>
-            <div class="testimonial-nav">
-                <button class="testimonial-btn active" data-index="0"></button>
-                <button class="testimonial-btn" data-index="1"></button>
-                <button class="testimonial-btn" data-index="2"></button>
             </div>
         </div>
     </section>
 
-    <!-- Consultation Booking Section -->
-    <section class="booking">
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title">Book Your Consultation</h2>
-            <div class="booking-form-card">
-                <form id="bookingForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Service</label>
-                            <select class="form-control" id="serviceSelect">
-                                <option value="">Select a service</option>
-                                <option value="personal">Personal Reading - <span class="price-in-select" data-usd="150" data-inr="12450">$150</span></option>
-                                <option value="business">Business Numerology - <span class="price-in-select" data-usd="200" data-inr="16600">$200</span></option>
-                                <option value="relationship">Relationship Compatibility - <span class="price-in-select" data-usd="125" data-inr="10375">$125</span></option>
-                                <option value="name">Name Analysis - <span class="price-in-select" data-usd="100" data-inr="8300">$100</span></option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Preferred Date</label>
-                            <input type="date" class="form-control" id="preferredDate" min="">
-                        </div>
+            <h3 class="section__title">Connect With Us</h3>
+            <div class="contact__content">
+                <p>Ready to discover what the numbers reveal about your destiny? Book a consultation or reach out with any questions.</p>
+                <div class="contact__info">
+                    <div class="contact__item">
+                        <strong>Email:</strong> <a href="mailto:consult@numerotalk.life" class="contact-link contact-link--email">consult@numerotalk.life</a>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="clientName" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" id="clientEmail" required>
-                        </div>
+                    <div class="contact__item">
+                        <strong>Phone:</strong> <a href="tel:+919156013570" class="contact-link contact-link--phone">+91 9156013570</a>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" id="clientPhone" required>
+                    <div class="contact__item">
+                        <strong>Consultation Hours:</strong> Mon-Sat, 11 AM - 7 PM IST
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Additional Notes</label>
-                        <textarea class="form-control" id="clientNotes" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn--primary btn--full-width btn--lg">Book Consultation</button>
-                </form>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="footer">
+    <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Contact Information</h3>
-                    <p>📧 pranjali@numerologyreadings.com</p>
-                    <p>📱 +91 98765 43210</p>
-                    <p>📍 Mumbai, India</p>
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <h4>Pranjali Zope</h4>
+                    <p>Certified Numerologist &amp; Yantra Expert</p>
                 </div>
-                <div class="footer-section">
-                    <h3>Follow Me</h3>
+                <div class="footer__links">
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#calculator">Numerology Calculator</a>
+                    <a href="#shop">Shop</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer__social">
+                    <h5>Connect With Us</h5>
                     <div class="social-links">
-                        <a href="#" target="_blank">Facebook</a>
-                        <a href="#" target="_blank">Instagram</a>
-                        <a href="#" target="_blank">YouTube</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Newsletter</h3>
-                    <div class="newsletter-form">
-                        <input type="email" class="form-control" placeholder="Enter your email">
-                        <button class="btn btn--primary">Subscribe</button>
+                        <a href="#" class="social-link facebook" target="_blank" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link instagram" target="_blank" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link youtube" target="_blank" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link linkedin" target="_blank" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Pranjali Zope - Certified Numerologist. All rights reserved.</p>
+            <div class="footer__bottom">
+                <p>&copy; 2025 Pranjali Zope. All rights reserved.</p>
             </div>
         </div>
     </footer>
